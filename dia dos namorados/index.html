@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      color: #f2f2f2;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(to right, #800040, #33001a);
+      padding: 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    #contadorDias {
+      margin-top: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 8px #ff3366;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff3366;
+      transform: rotate(45deg);
+      animation: float 6s infinite ease-in;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff3366;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .texto p {
+      font-family: 'Great Vibes', cursive;
+      font-size: 24px;
+      line-height: 1.6;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .galeria img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: #2b2b2b;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    #painel-musica {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #ff3366;
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    #painel-musica button {
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.5rem;
+      padding: 0;
+    }
+
+    #painel-musica input[type="range"] {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<audio id="player" src="dia dos namorados/Música dia dos namorados.mp3"></audio>
+
+  <div id="painel-musica">
+    <button id="playPauseBtn" onclick="togglePlayPause()">▶️</button>
+    <label for="volume">🔊</label>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5" />
+    <span id="status">Pausado ⏸️</span>
+  </div>
+
+  <div class="hearts"></div>
+
+  <header>
+    <h1>Feliz Dia dos Namorados Minha Princesa 💕</h1>
+    <div id="contadorDias">0</div>
+  </header>
+
+  <main>
+    <div class="texto">
+      <p>Feliz dia dos namorados meu amor, obrigado por todos nosso momentos juntos, você é muito especial para mim! esse é nosso primeiro dia dos namorados juntos, o primeiro de muitos meu amor, cada momento que passo com você, cada segundo que penso em você, tenho a maior certeza de que fiz a maior e melhor escolha da minha vida. Quero que você saiba que independente de qualquer coisa, eu sempre vou estar com você, nos momentos bons e nos ruins. Eu Lorenzo Gabriel Feliciano da Silva juro com cada célula do meu corpo, amor eterno por você Brenda Mercedes Cubells Vidal. Eu te amo para sempre meu amor, daqui até o completo vazio do universo e do infinito.🌌❤️</p>
+    </div>
+
+    <div class="galeria">
+      <img src="dia dos namorados/Foto 1.jpeg" alt="">
+      <img src="dia dos namorados/Foto 2.jpeg" alt="">
+      <img src="dia dos namorados/Foto 3.jpeg" alt="">
+    </div>
+  </main>
+
+  <footer>
+    Com muito amor, Lorenzo💫<br/>
+    Eu te amo, minha linda! 💖<br/>
+    Você é meu tudo, pra sempre!🌹
+  </footer>
+
+  <script>
+    for (let i = 0; i < 20; i++) {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * 100 + 'vh';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      document.querySelector('.hearts').appendChild(heart);
+    }
+
+    function atualizarContador() {
+      const dataInicio = new Date(2025, 1, 8, 0, 0, 0);
+      const agora = new Date();
+      let diff = agora - dataInicio;
+
+      const segundosTotais = Math.floor(diff / 1000);
+      let segundos = segundosTotais % 60;
+      let minutos = Math.floor((segundosTotais / 60) % 60);
+      let horas = Math.floor((segundosTotais / 3600) % 24);
+      let diasTotais = Math.floor(segundosTotais / 86400);
+
+      let meses = Math.floor(diasTotais / 30.44);
+      let dias = Math.floor(diasTotais - (meses * 30.44));
+
+      const texto = `${meses} meses, ${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+      document.getElementById('contadorDias').textContent = texto;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    const audio = document.getElementById('player');
+    const volumeControl = document.getElementById('volume');
+    const status = document.getElementById('status');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+
+    audio.volume = 0.5;
+
+    function togglePlayPause() {
+      if (audio.paused) {
+        audio.play();
+        status.textContent = "Tocando ▶️";
+        playPauseBtn.textContent = "⏸️";
+      } else {
+        audio.pause();
+        status.textContent = "Pausado ⏸️";
+        playPauseBtn.textContent = "▶️";
+      }
+    }
+
+    volumeControl.addEventListener('input', () => {
+      audio.volume = volumeControl.value;
+    });
+
+    audio.addEventListener('ended', () => {
+      playPauseBtn.textContent = "▶️";
+      status.textContent = "Pausado ⏸️";
+    });
+  </script>
+</body>
+</html>
